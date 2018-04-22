@@ -1,12 +1,10 @@
 version: '2'
 services:
   keycloak:
-    build: .
     image: jboss/keycloak:3.3.0.Final
     command: ["-b", "0.0.0.0", "-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=dir", "-Dkeycloak.migration.dir=/opt/jboss/keycloak/realm-config", "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING", "-Djboss.socket.binding.port-offset=1000"]
     volumes:
       - ./config/realm:/opt/jboss/keycloak/realm-config
-      - ./themes/keycloak/:/opt/jboss/keycloak/themes/keycloak/
       - ./themes/my-keycloak/:/opt/jboss/keycloak/themes/my-keycloak/
     environment:
       - KEYCLOAK_USER=admin
